@@ -2,10 +2,10 @@ public class Personaje
 {
     private String nombre;
     private String ataque;
-    private double daño;
+    private int daño;
     private int vida;
 
-    public Personaje (String nombre, double daño, int vida)
+    public Personaje (String nombre, int daño, int vida)
     {
         this.nombre = nombre;
         this.daño = daño;
@@ -27,10 +27,10 @@ public class Personaje
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public double getDaño() {
+    public int getDaño() {
         return daño;
     }
-    public void setDaño( double daño) {
+    public void setDaño( int daño) {
         this.daño = daño;
     }
    
