@@ -29,4 +29,19 @@ public class despertarDelHeroe
         +"2.Acciones\n"
         +"3.Puntuaciones\n";
     }
+    
+    public static void curarVida(Heroe heroe)
+    {
+       
+        int vidaactual = heroe.getVida();
+        vidaactual += 25;
+        heroe.setVida(vidaactual);
+    }
+    public static void main(String[] args)
+    {
+        Heroe heroe = new Heroe("Adrian", 0, 100);
+        Enemigo enemigo = new Enemigo("Zaid", 0, 40, 1);
+        Enemigo villano = new Enemigo("ehle", 0, 60, 2);
+        Enemigo Oscuro  = new Enemigo("dñhgol", 0, 80, 3);
+    }
 }

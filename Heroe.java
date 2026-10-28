@@ -1,15 +1,9 @@
 public class Heroe  extends Personaje
 {
-private int curar;
-public Heroe(String nombre, String ataque, int daño)
+public Heroe(String nombre, int daño, int vida)
 {
-    super(nombre, ataque, daño);
-    this.curar = curar;
+    super(nombre, daño, vida);
+ 
 }
-public int getCurar() {
-    return curar;
-}
-public void setCurar(int curar) {
-    this.curar = curar;
-}
+
 }
