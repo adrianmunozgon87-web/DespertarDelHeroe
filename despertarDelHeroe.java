@@ -42,8 +42,8 @@ public class despertarDelHeroe
     {
         return
         "Cada turno puedes:\n"
-        +"  -Atacar"
-        +"  -Curarte"
+        +"  -Atacar\n"
+        +"  -Curarte\n"
         +"  -Consultar inventario anque no gastas el turno";
     }
     public static String puntuaciones()
@@ -73,7 +73,26 @@ public class despertarDelHeroe
         int dañoEnemigo = random.nextInt(5-15);
         return dañoEnemigo;
     }
-
+    public static String Historia()
+    {
+        return
+        "Durante cien años, el reino de Eldrath vivió en paz bajo la luz de la Llama Eterna. Pero una noche el fuego se apagó, y de las sombras del bosque surgieron criaturas que nadie había visto jamás.\n" + //
+                        "\n" + //
+                        "Tú eres un joven sin nombre ni fama, y hoy despiertas en una cabaña abandonada, con una espada oxidada y tres pociones que dejó un viejo curandero.\n" + //
+                        "\n" + //
+                        "Tres enemigos te esperan en el camino hacia la Llama. Cada uno es más fuerte que el anterior. ¿Despertará el héroe que llevas dentro?";
+    }
+    public static String nombreDelHeroe()
+    {
+        Scanner sc = new Scanner(System.in);
+            System.out.println("Introduce el nombre de tu heroe");
+            String nombre  = sc.next();
+            if(nombre==null)
+                {
+                System.out.println("El nombre no puede estar vacio");
+                }
+            return nombre;
+    }
     public static void main(String[] args)
     {
         int opcion;
@@ -89,6 +108,8 @@ public class despertarDelHeroe
             switch (opcion) {
                 case 1:
                     System.out.println("Iniciando partdida....");
+                    String heroenombre = nombreDelHeroe();
+                    heroe.setNombre(heroenombre);
                     repetir = false;
                     break;
                 case 2:
@@ -99,25 +120,31 @@ public class despertarDelHeroe
                     switch (opcionAyuda) {
                         case 1:
                             System.out.println(reglas());
+
                             repetir = false;
                             break;
                         case 2:
                             System.out.println(acciones());
                             repetir = false;
+                            break;
                         case 3:
                             System.out.println(puntuaciones());
                             repetir = false;
+                            break;
                         default:
                             break;
                     }
                     break;
                 case 4:
+                    System.out.println("Hasta luego");
                     break;
             }
 
         }while(repetir); 
             
         
+    System.out.println("El nombre del heroe es: "+heroe.getNombre());
     }
-
+    
+    
 }
