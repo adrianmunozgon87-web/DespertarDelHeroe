@@ -80,7 +80,10 @@ public class despertarDelHeroe
                         "\n" + //
                         "Tú eres un joven sin nombre ni fama, y hoy despiertas en una cabaña abandonada, con una espada oxidada y tres pociones que dejó un viejo curandero.\n" + //
                         "\n" + //
-                        "Tres enemigos te esperan en el camino hacia la Llama. Cada uno es más fuerte que el anterior. ¿Despertará el héroe que llevas dentro?";
+                        "Tres enemigos te esperan en el camino hacia la Llama. Cada uno es más fuerte que el anterior. ¿Despertará el héroe que llevas dentro?\n"
+                        +"El camino hacia la Llama Eterna se estrecha entre árboles retorcidos. El aire huele a ceniza y, a lo lejos, algo se mueve entre las sombras.\n"
+                        +"Aprietas la empuñadura de tu espada oxidada. No hay vuelta atrás: el enemigo te ha visto.\n"
+                        +"¡Comienza la batalla!";
     }
     public static String nombreDelHeroe()
     {
@@ -93,6 +96,7 @@ public class despertarDelHeroe
                 }
             return nombre;
     }
+
     public static void main(String[] args)
     {
         int opcion;
@@ -109,6 +113,7 @@ public class despertarDelHeroe
                 case 1:
                     System.out.println("Iniciando partdida....");
                     String heroenombre = nombreDelHeroe();
+                    System.out.println(Historia());
                     heroe.setNombre(heroenombre);
                     repetir = false;
                     break;
