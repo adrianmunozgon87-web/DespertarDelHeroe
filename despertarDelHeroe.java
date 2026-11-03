@@ -96,15 +96,78 @@ public class despertarDelHeroe
                 }
             return nombre;
     }
+    public static String batallaOpciones()
+    {
+        return
+        "1.Atacar\n"
+        +"2.Curarte\n"
+        +"3.Inventario\n"
+        +"4.Huir";
+    }
+    static final int enCurso = 0;
+    static final int victoria = 1;
+    static final int derrota = 2;
+    public static void accionesBatalla(Scanner sc)
+    {
+       int resultado = enCurso;
+       boolean enCombate = true;
+        while (enCombate) {
+            System.out.println(batallaOpciones());
+        }
+      int option = sc.nextInt();
+        switch (option) {
+            case 1:
+                DañoHeroe();
+                turnoConsumido = true;
+                break;
+            
+            case 2:
+                curarVida(null);
+                break;
+            case 3:
+                
 
+                break;
+            case 4:
+                resultado = huir();
+                enCombate = true;
+                break;
+            default:
+                break;
+        }
+    }
+    public static int huir()
+    {
+        System.out.println("huyes de la batalla...");
+        return abandono;
+    }
+    static final int abandono = 3;
+    static final int puntosPorEnemigo = 100;
+    static final int totalEnemigos = 3;
+    public static int calcularPuntuacion(int enemigosDerrotados, int vidaactual )
+    {
+        int puntos = enemigosDerrotados * puntosPorEnemigo;
+        if(enemigosDerrotados == totalEnemigos){
+            puntos = puntos +  vidaactual;
+        }
+        return puntos;
+    }
+    public static boolean enemigoDerrotad(int vidaEnemigo)
+    {
+      return vidaEnemigo <= 0;
+    }
+    public static void turnoConsumido()
+    {
+
+    }
     public static void main(String[] args)
     {
         int opcion;
         boolean repetir = true;
         Heroe heroe = new Heroe("Adrian", 0, 100);
-        Enemigo enemigo = new Enemigo("Zaid", 0, 40, 1);
-        Enemigo villano = new Enemigo("ehle", 0, 60, 2);
-        Enemigo Oscuro  = new Enemigo("dñhgol", 0, 80, 3);
+        Enemigo enemigo = new Enemigo("Mordisco", 0, 40, 1);
+        Enemigo villano = new Enemigo("Gorvak", 0, 60, 2);
+        Enemigo Oscuro  = new Enemigo("Nerthal", 0, 80, 3);
         Scanner sc = new Scanner(System.in);
         do{
             System.out.println(Inicio());
@@ -115,6 +178,7 @@ public class despertarDelHeroe
                     String heroenombre = nombreDelHeroe();
                     System.out.println(Historia());
                     heroe.setNombre(heroenombre);
+                    System.out.println(batallaOpciones());
                     repetir = false;
                     break;
                 case 2:
