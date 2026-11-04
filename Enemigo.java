@@ -3,7 +3,7 @@ public class Enemigo  extends Personaje
     private int nivel;
     public Enemigo(String nombre, int daño, int vida, int nivel)
     {
-       super(nombre, daño, vida);
+       super(true, nombre, daño, vida);
        this.nivel = nivel;
     }
     public int getNivel() {

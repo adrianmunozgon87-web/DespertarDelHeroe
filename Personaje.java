@@ -4,13 +4,14 @@ public class Personaje
     private String ataque;
     private int daño;
     private int vida;
+    private boolean vivo;
 
-    public Personaje (String nombre, int daño, int vida)
+    public Personaje ( boolean vivo, String nombre, int daño, int vida)
     {
         this.nombre = nombre;
         this.daño = daño;
         this.vida = vida;
-        
+        this.vivo = vivo;
     }
    
     public int getVida() {
@@ -45,5 +46,9 @@ public class Personaje
         System.out.println("Daño: " + this.daño);
        
 
+    }
+    public boolean vivo()
+    {
+        return vida > 0;
     }
 }
