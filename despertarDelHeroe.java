@@ -11,18 +11,40 @@ public class despertarDelHeroe
         +"3.Ayuda\n"
         +"4.Salir\n";
     }
-    public static void mostrarInventario(String [] nombre, int [] cantidad)
+    public static String[] crearInventario()
     {
-        int i;
-        for(i = 0; i<6; i++)
+        String [] inventario = {"pocion", "pocion", "pocion"};
+         return inventario;
+            
+    }
+   
+    public static void mostrarInventario( String [] crearInventario)
+    {
+        int pociones = 3;
+        for ( int i = 0 ; i< crearInventario.length; i ++)
         {
-            if(cantidad[i]== 0) 
+            if (crearInventario [i] == null)
             {
-                System.out.println("Hueco " + i + " Vacio");
-            }else{
-                System.out.println("Hueco " + i + ": ");
+                System.out.println("Hueco " + (i+1) + ": "+ "vacio");
+            }
+            else{
+                System.out.println("Hueco " + (i+1) + ": "+ crearInventario[i]);
             }
         }
+        
+    }
+    public static void usarPocion(String [] crearInventario)
+    {
+        for (int i = 0; i< crearInventario.length; i++){
+            if(crearInventario[i] != null)
+            {
+                crearInventario[i] = null;
+            }
+        }
+            
+            
+        
+        
     }
     public static String ayuda()
     {
@@ -58,7 +80,12 @@ public class despertarDelHeroe
        
         int vidaactual = heroe.getVida();
         vidaactual += 25;
+        int vidaMaximaDelHeroe = 100;
+        if(vidaactual > vidaMaximaDelHeroe){
+            vidaactual = vidaMaximaDelHeroe;
+        }
         heroe.setVida(vidaactual);
+        
     }
     public static int DanioHeroe()
     {
@@ -73,20 +100,21 @@ public class despertarDelHeroe
         int dañoEnemigo = random.nextInt(5,15);
         return dañoEnemigo;
     }
-    public static String Historia()
+    public static void Historia()
     {
-        return
-        "Durante cien años, el reino de Eldrath vivió en paz bajo la luz de la Llama Eterna. Pero una noche el fuego se apagó, y de las sombras del bosque surgieron criaturas que nadie había visto jamás.\n" + //
-                        "\n" + //
-        "Tú eres un joven sin nombre ni fama, y hoy despiertas en una cabaña abandonada, con una espada oxidada y tres pociones que dejó un viejo curandero.\n" + //
-                        "\n" + //
-        "Tres enemigos te esperan en el camino hacia la Llama. Cada uno es más fuerte que el anterior. ¿Despertará el héroe que llevas dentro?\n" + //
-                        "\n" + //
-        "El camino hacia la Llama Eterna se estrecha entre árboles retorcidos. El aire huele a ceniza y, a lo lejos, algo se mueve entre las sombras.\n" + //
-                        "\n" + //
-        "Aprietas la empuñadura de tu espada oxidada. No hay vuelta atrás: el enemigo te ha visto.\n" + //
-                        "\n" + //
-        "¡Comienza la batalla!";
+        
+        System.out.println("Durante cien años, el reino de Eldrath vivió en paz bajo la luz de la Llama Eterna. Pero una noche el fuego se apagó, y de las sombras del bosque surgieron criaturas que nadie había visto jamás.");
+            esperar(2);
+        System.out.println("Tú eres un joven sin nombre ni fama, y hoy despiertas en una cabaña abandonada, con una espada oxidada y tres pociones que dejó un viejo curandero.");
+            esperar(2);
+        System.out.println("Tres enemigos te esperan en el camino hacia la Llama. Cada uno es más fuerte que el anterior. ¿Despertará el héroe que llevas dentro?");
+            esperar(2);
+        System.out.println("El camino hacia la Llama Eterna se estrecha entre árboles retorcidos. El aire huele a ceniza y, a lo lejos, algo se mueve entre las sombras.");
+            esperar(2);
+        System.out.println("Aprietas la empuñadura de tu espada oxidada. No hay vuelta atrás: el enemigo te ha visto.");
+            esperar(2);
+        System.out.println(" ¡Comienza la batalla!");
+            esperar(2);
     }
     public static String nombreDelHeroe()
     {
@@ -99,7 +127,7 @@ public class despertarDelHeroe
                 }
             return nombre;
     }
-    public static String batallaOpciones()
+    public static String batallaOpciones(Heroe heroe, Enemigo enemigo)
     {
         return
         "1.Atacar\n"
@@ -113,41 +141,65 @@ public class despertarDelHeroe
     public static int  accionesBatalla(Heroe heroe, Enemigo enemigo)
     {
         Scanner sc = new Scanner(System.in);
-        boolean turnoConsumido;
+        boolean turnoConsumido = false;
        int resultado = enCurso;
        boolean enCombate = true;
         
-        while (enCombate) {    
+        while (enCombate) {  
+            System.out.println(batallaOpciones(heroe, enemigo));  
             int option = sc.nextInt();
             switch (option) {
             case 1:
-                if(enCombate = true)
-                {
-                    System.out.println("Enemigo atacado");
-                }
+                
+                
+                System.out.println("Atacando...");
+                
                 restarVida(enemigo, heroe);
-                System.out.println("El enemigo tiene "+enemigo.getVida());
+                System.out.println("El enemigo tiene " + enemigo.getVida() + " de vida");
                 turnoConsumido = true;
                 break;
             
             case 2:
-                curarVida(null);
+                curarVida(heroe);
+                System.out.println("El heroe se ha curado y tiene " +heroe.getVida());
+                usarPocion(crearInventario());
                 turnoConsumido = true;
                 break;
             case 3:
-                
+                String [] inventario = crearInventario();
+                mostrarInventario(inventario);
+                turnoConsumido = false;
 
                 break;
             case 4:
                 resultado = huir();
-                enCombate = true;
+                enCombate = false;
                 break;
             default:
+                System.out.println("Has introducido un caracter incorrecto");
+            
                 break;
             
             }
+            if(turnoConsumido && enemigo.vivo() && heroe.vivo())
+        {
+            System.out.println(" TURNO  DEL ENEMIGO");
+            enemigo.setDanio(DanioEnemigo());
+            int HeroeVidaActual = heroe.getVida();
+            System.out.println("Vida del heroe antes: " + HeroeVidaActual);
+            int vidaFinal = HeroeVidaActual - enemigo.getDanio();
+            if(vidaFinal < 0)
+            {
+                vidaFinal = 0;
+            }
+            heroe.setVida(vidaFinal);
+            System.out.println("Vida del heroe despues: " + heroe.getVida());
+        }
+       
+            
         }
         return resultado;
+        
     }
     public static int huir()
     {
@@ -173,32 +225,45 @@ public class despertarDelHeroe
     {
         if(enemigo.vivo())
         {
-            heroe.setDaño(DanioHeroe());
+            heroe.setDanio(DanioHeroe());
            
             int enemigoVidaActual = enemigo.getVida();
-            int vidaFin = enemigoVidaActual - heroe.getDaño();
+            int vidaFin = enemigoVidaActual - heroe.getDanio();
+        
+            if(vidaFin <0){
+                vidaFin = 0;
+            }
             enemigo.setVida(vidaFin);
         }
-        else{
-            int vidaFin = 0;
-            enemigo.setVida(vidaFin);
-        }
-    } 
-    public static void restarVidaHeroe(Heroe heroe, Enemigo enemigo)
-    {
-        if(heroe.vivo())
-        {
-            enemigo.setDaño(DanioEnemigo());
-            int HeroeVidaActual = heroe.getVida();
-            int vidaFinal = HeroeVidaActual - enemigo.getDaño();
-            heroe.setVida(vidaFinal);
 
-        }else{
-            int vidaFinal = 0;
-            enemigo.setVida(vidaFinal);
-        }
+       
+        
     }
     
+    public static void esperar(int segundos)
+    
+    {
+        try
+        {
+            Thread.sleep(segundos * 1000);
+        }
+        catch(InterruptedException e)
+        {
+            System.out.println("Se ha interrumpido la espera");
+        }
+    }
+    public static void Historia2()
+    {
+        System.out.println("El enemigo cae al suelo y su cuerpo se convierte poco a poco en cenizas oscuras. Por un instante, el bosque queda en silencio. Respiras profundamente y limpias tu espada, consciente de que has superado tu primera prueba.");
+        esperar(2);
+        System.out.println("Entre los restos de la criatura encuentras un pequeño fragmento brillante que desprende un calor extraño. Al acercarlo a tu mano, una tenue luz dorada ilumina el camino que tienes delante.");
+        esperar(2);
+        System.out.println("Pero la tranquilidad dura poco. Un rugido profundo retumba entre los árboles. Algo mucho más grande te está esperando.");
+        esperar(2);
+        System.out.println("Aprietas tu espada y continúas avanzando. La Llama Eterna aún necesita un héroe.");
+        esperar(2);
+    }
+   
     public static void main(String[] args)
     {
         int opcion;
@@ -215,9 +280,8 @@ public class despertarDelHeroe
                 case 1:
                     System.out.println("Iniciando partdida....");
                     String heroenombre = nombreDelHeroe();
-                    System.out.println(Historia());
+                    Historia();
                     heroe.setNombre(heroenombre);
-                    System.out.println(batallaOpciones());
                     int resultado = accionesBatalla(heroe,enemigo);
                     repetir = false;
                     break;
@@ -246,13 +310,13 @@ public class despertarDelHeroe
                     break;
                 case 4:
                     System.out.println("Hasta luego");
+                    repetir = false;
                     break;
             }
 
         }while(repetir); 
             
         
-    System.out.println("El nombre del heroe es: "+heroe.getNombre());
     }
     
     

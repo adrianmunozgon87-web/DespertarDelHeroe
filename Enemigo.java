@@ -1,9 +1,9 @@
 public class Enemigo  extends Personaje
 {
     private int nivel;
-    public Enemigo(String nombre, int daño, int vida, int nivel)
+    public Enemigo(String nombre, int danio, int vida, int nivel)
     {
-       super(true, nombre, daño, vida);
+       super(true, nombre, danio, vida);
        this.nivel = nivel;
     }
     public int getNivel() {

@@ -1,8 +1,8 @@
 public class Heroe  extends Personaje
 {
-public Heroe(String nombre, int daño, int vida, boolean vivo)
+public Heroe(String nombre, int danio, int vida, boolean vivo)
 {
-    super(vivo, nombre, daño, vida);
+    super(vivo, nombre, danio, vida);
  
 }
 

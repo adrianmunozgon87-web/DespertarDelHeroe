@@ -2,14 +2,14 @@ public class Personaje
 {
     private String nombre;
     private String ataque;
-    private int daño;
+    private int danio;
     private int vida;
     private boolean vivo;
 
-    public Personaje ( boolean vivo, String nombre, int daño, int vida)
+    public Personaje ( boolean vivo, String nombre, int danio, int vida)
     {
         this.nombre = nombre;
-        this.daño = daño;
+        this.danio = danio;
         this.vida = vida;
         this.vivo = vivo;
     }
@@ -28,11 +28,11 @@ public class Personaje
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public int getDaño() {
-        return daño;
+    public int getDanio() {
+        return danio;
     }
-    public void setDaño( int daño) {
-        this.daño = daño;
+    public void setDanio( int danio) {
+        this.danio = danio;
     }
    
         
@@ -43,7 +43,7 @@ public class Personaje
     {
         System.out.println("Nombre: " + this.nombre);
         System.out.println("Ataque: " + this.ataque);
-        System.out.println("Daño: " + this.daño);
+        System.out.println("Danio: " + this.danio);
        
 
     }
