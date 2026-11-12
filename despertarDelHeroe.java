@@ -145,7 +145,7 @@ public class despertarDelHeroe
        int resultado = enCurso;
        boolean enCombate = true;
         
-        while (enCombate) {  
+        while (enCombate && enemigo.vivo() && heroe.vivo()) {  
             System.out.println(batallaOpciones(heroe, enemigo));  
             int option = sc.nextInt();
             switch (option) {
@@ -156,6 +156,7 @@ public class despertarDelHeroe
                 
                 restarVida(enemigo, heroe);
                 System.out.println("El enemigo tiene " + enemigo.getVida() + " de vida");
+                esperar(2);
                 turnoConsumido = true;
                 break;
             
@@ -186,14 +187,15 @@ public class despertarDelHeroe
             System.out.println(" TURNO  DEL ENEMIGO");
             enemigo.setDanio(DanioEnemigo());
             int HeroeVidaActual = heroe.getVida();
-            System.out.println("Vida del heroe antes: " + HeroeVidaActual);
+            
             int vidaFinal = HeroeVidaActual - enemigo.getDanio();
             if(vidaFinal < 0)
             {
                 vidaFinal = 0;
             }
             heroe.setVida(vidaFinal);
-            System.out.println("Vida del heroe despues: " + heroe.getVida());
+            System.out.println("Vida del heroe : " + heroe.getVida());
+            esperar(2);
         }
        
             
@@ -234,6 +236,7 @@ public class despertarDelHeroe
                 vidaFin = 0;
             }
             enemigo.setVida(vidaFin);
+            
         }
 
        
@@ -263,7 +266,23 @@ public class despertarDelHeroe
         System.out.println("Aprietas tu espada y continúas avanzando. La Llama Eterna aún necesita un héroe.");
         esperar(2);
     }
-   
+   public static void Historia3()
+   {
+        System.out.println("Tras una dura batalla Grovak cae de rodillas y desaparece entre la saombras");
+        esperar(2);
+        System.out.println("Sigues avanzando hasta llegar a las ruinas de un antiguo templo, donde la Llama Eterna permanece apagada.");
+        esperar(2);
+        System.out.println("De repente, el suelo comienza a temblar. Una enorme figura emerge de las sombras.");
+        esperar(2);
+        System.out.println("Es Nerthal, el guardián oscuro, la criatura más poderosa que has encontrado.");
+        esperar(2);
+        System.out.println("Nerthal levanta su espada y grita: ¡Nadie volverá a encender la Llama Eterna mientras yo siga con vida!");
+        esperar(2);
+        System.out.println("Agarras tu espada con fuerza. El destino de Eldrath está en tus manos.");
+        esperar(2);
+        System.out.println("comienza la batalla final!");
+        esperar(1);
+   }
     public static void main(String[] args)
     {
         int opcion;
@@ -283,6 +302,15 @@ public class despertarDelHeroe
                     Historia();
                     heroe.setNombre(heroenombre);
                     int resultado = accionesBatalla(heroe,enemigo);
+                    if( heroe.vivo() && !enemigo.vivo()){
+                        Historia2();
+                    }
+                    System.out.println("--APARECE GROVAK--");
+                    accionesBatalla(heroe, villano);
+                    if( heroe.vivo() && !villano.vivo()){
+                        Historia3();
+                    }
+                    accionesBatalla(heroe,Oscuro);
                     repetir = false;
                     break;
                 case 2:
