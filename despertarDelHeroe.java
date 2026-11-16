@@ -33,18 +33,16 @@ public class despertarDelHeroe
         }
         
     }
-    public static void usarPocion(String [] crearInventario)
+    public static boolean usarPocion(String [] Inventario)
     {
-        for (int i = 0; i< crearInventario.length; i++){
-            if(crearInventario[i] != null)
+        for (int i = 0; i< Inventario.length; i++){
+            if(Inventario[i] != null)
             {
-                crearInventario[i] = null;
+                Inventario[i] = null;
+                return  true;
             }
         }
-            
-            
-        
-        
+        return false;
     }
     public static String ayuda()
     {
@@ -138,7 +136,7 @@ public class despertarDelHeroe
     static final int enCurso = 0;
     static final int victoria = 1;
     static final int derrota = 2;
-    public static int  accionesBatalla(Heroe heroe, Enemigo enemigo)
+    public static int  accionesBatalla(Heroe heroe, Enemigo enemigo, String[] inventario)
     {
         Scanner sc = new Scanner(System.in);
         boolean turnoConsumido = false;
@@ -161,13 +159,24 @@ public class despertarDelHeroe
                 break;
             
             case 2:
-                curarVida(heroe);
-                System.out.println("El heroe se ha curado y tiene " +heroe.getVida());
-                usarPocion(crearInventario());
-                turnoConsumido = true;
+                if(heroe.getVida() == 100)
+                {
+                    System.out.println("Ya tienes la vida al maximo");
+                    turnoConsumido = false;
+                }
+                else if(usarPocion(inventario))
+                {
+                    curarVida(heroe);
+                    System.out.println("Te has curado. Vida actual: " + heroe.getVida());
+                    turnoConsumido = true;
+                }
+                else{
+                    System.out.println("No te quedan pociones");
+                    turnoConsumido = false;
+                }
                 break;
             case 3:
-                String [] inventario = crearInventario();
+                crearInventario();
                 mostrarInventario(inventario);
                 turnoConsumido = false;
 
@@ -283,8 +292,34 @@ public class despertarDelHeroe
         System.out.println("comienza la batalla final!");
         esperar(1);
    }
+   public static void cambioBatalla(Heroe heroe,  Enemigo enemigo, Enemigo villano, Enemigo Oscuro, String [] inventario)
+   { 
+     if( heroe.vivo() && !enemigo.vivo())
+        {
+        Historia2();      
+        System.out.println("--APARECE GROVAK--");
+        accionesBatalla(heroe, villano,inventario);
+        if( heroe.vivo() && !villano.vivo())
+            {
+         Historia3();
+         System.out.println("--APARECE OSCURO--");
+         accionesBatalla(heroe,Oscuro,inventario);
+             }
+        }
+   }
+   public static void historia4()
+    {
+        System.out.println("El templo se queda en silencio. La llama sigue apagada");
+        System.out.println("Te acercas al altar y colocas tu espada sobre el");
+        System.out.println("Derrepente la luz dorada ilumina las ruinas");
+        System.out.println("La llama  eterna vuelve a arder");
+        System.out.println("Regresa la paz al reino");
+        System.out.println("ERES EL HEROE QUE SALVO ELDRATH!!!");
+        System.out.println("¡ENHORABUENA! ¡HAS COMPLETADO EL JUEGO!");
+    }             
     public static void main(String[] args)
     {
+        String[] inventario = crearInventario();
         int opcion;
         boolean repetir = true;
         Heroe heroe = new Heroe("Adrian", 0, 100, true);
@@ -294,23 +329,22 @@ public class despertarDelHeroe
         Scanner sc = new Scanner(System.in);
         do{
             System.out.println(Inicio());
-            opcion = sc.nextInt();
+            if(sc.hasNextInt())
+            {
+                opcion=sc.nextInt();
+            }else{
+                System.out.println("Caracter incorrecto. Introduce un numero del 1-4");
+                sc.next();
+                continue;
+            }
             switch (opcion) {
                 case 1:
                     System.out.println("Iniciando partdida....");
                     String heroenombre = nombreDelHeroe();
                     Historia();
                     heroe.setNombre(heroenombre);
-                    int resultado = accionesBatalla(heroe,enemigo);
-                    if( heroe.vivo() && !enemigo.vivo()){
-                        Historia2();
-                    }
-                    System.out.println("--APARECE GROVAK--");
-                    accionesBatalla(heroe, villano);
-                    if( heroe.vivo() && !villano.vivo()){
-                        Historia3();
-                    }
-                    accionesBatalla(heroe,Oscuro);
+                    int resultado = accionesBatalla(heroe,enemigo,inventario);
+                    cambioBatalla(heroe, enemigo, villano, Oscuro, inventario);
                     repetir = false;
                     break;
                 case 2:
@@ -322,7 +356,7 @@ public class despertarDelHeroe
                         case 1:
                             System.out.println(reglas());
 
-                            repetir = false;
+                            repetir=false;
                             break;
                         case 2:
                             System.out.println(acciones());
