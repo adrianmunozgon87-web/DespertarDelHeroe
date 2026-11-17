@@ -8,7 +8,6 @@ import org.w3c.dom.NodeList;
 public class LeerRanking {
 
     public static void mostrarRanking() {
-
         try {
             File archivo = new File("ranking.xml");
             if (!archivo.exists()) {
@@ -23,15 +22,43 @@ public class LeerRanking {
                 System.out.println("El ranking esta vacio");
                 return;
             }
-            System.out.println("===== RANKING =====");
+            String[] nombres = new String[jugadores.getLength()];
+            int[] puntos = new int[jugadores.getLength()];
+
+            
             for (int i = 0; i < jugadores.getLength(); i++) {
                 Element jugador = (Element) jugadores.item(i);
-                String usuario = jugador.getElementsByTagName("usuario")
+                nombres[i] = jugador.getElementsByTagName("usuario")
                         .item(0).getTextContent();
-                String puntos = jugador.getElementsByTagName("puntos")
-                        .item(0).getTextContent();
-                System.out.println((i + 1) + ". " + usuario + " - " + puntos + " puntos");
+
+                puntos[i] = Integer.parseInt(
+                        jugador.getElementsByTagName("puntos")
+                                .item(0).getTextContent());
             }
+
+            for (int i = 0; i < puntos.length - 1; i++) {
+                for (int j = i + 1; j < puntos.length; j++) {
+                    if (puntos[j] > puntos[i]) {
+
+                        int puntosAux = puntos[i];
+                        puntos[i] = puntos[j];
+                        puntos[j] = puntosAux;
+
+                        String nombreAux = nombres[i];
+                        nombres[i] = nombres[j];
+                        nombres[j] = nombreAux;
+                    }
+                }
+            }
+            System.out.println("===== TOP 10 RANKING =====");
+
+            int limite = Math.min(10, nombres.length);
+
+            for (int i = 0; i < limite; i++) {
+                System.out.println((i + 1) + ". " + nombres[i]
+                        + " - " + puntos[i] + " puntos");
+            }
+
         } catch (Exception e) {
             System.out.println("Error al leer el ranking");
             e.printStackTrace();
