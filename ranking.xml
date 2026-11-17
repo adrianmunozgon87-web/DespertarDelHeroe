@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE ranking SYSTEM "ranking.dtd">
+<ranking>
+        
+    <jugador>
+                
+        <usuario>hola</usuario>
+                
+        <puntos>0</puntos>
+            
+    </jugador>
+    
+    <jugador>
+        <usuario>rayo</usuario>
+        <puntos>303</puntos>
+    </jugador>
+</ranking>
