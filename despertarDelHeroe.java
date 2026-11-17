@@ -304,21 +304,44 @@ public class despertarDelHeroe
          Historia3();
          System.out.println("--APARECE OSCURO--");
          accionesBatalla(heroe,Oscuro,inventario);
+             if(heroe.vivo() && !Oscuro.vivo()){
+                historia4();
              }
         }
+
+        }
    }
+   public static void contarEnemigosDerrotados(Enemigo enemigo, Enemigo villano, Enemigo Oscuro, int enemigosDerrotados){
+    if(!enemigo.vivo()){
+        enemigosDerrotados++;
+    }
+    if(!villano.vivo()){
+        enemigosDerrotados++;
+    }
+    if(!Oscuro.vivo()){
+        enemigosDerrotados++;
+    }
+   }
+
    public static void historia4()
     {
         System.out.println("El templo se queda en silencio. La llama sigue apagada");
+        esperar(2);
         System.out.println("Te acercas al altar y colocas tu espada sobre el");
+        esperar(2);
         System.out.println("Derrepente la luz dorada ilumina las ruinas");
+        esperar(2);
         System.out.println("La llama  eterna vuelve a arder");
+        esperar(2);
         System.out.println("Regresa la paz al reino");
+        esperar(2);
         System.out.println("ERES EL HEROE QUE SALVO ELDRATH!!!");
+        esperar(2);
         System.out.println("¡ENHORABUENA! ¡HAS COMPLETADO EL JUEGO!");
     }             
     public static void main(String[] args)
     {
+        CrearXMLRanking.crearXML();//comprobar si existe el xml
         String[] inventario = crearInventario();
         int opcion;
         boolean repetir = true;
@@ -345,32 +368,47 @@ public class despertarDelHeroe
                     heroe.setNombre(heroenombre);
                     int resultado = accionesBatalla(heroe,enemigo,inventario);
                     cambioBatalla(heroe, enemigo, villano, Oscuro, inventario);
+                    int enemigosDerrotados = 0;
+                    contarEnemigosDerrotados(enemigo, villano, Oscuro, enemigosDerrotados);
+                    int puntuacion = calcularPuntuacion(enemigosDerrotados, enemigosDerrotados);
+                    GuardarRanking.guardarJugador(heroe.getNombre(), puntuacion);
                     repetir = false;
                     break;
                 case 2:
+                    LeerRanking.mostrarRanking();
+                    esperar(4);
                     break;
                 case 3:
                     System.out.println(ayuda());
-                    int opcionAyuda = sc.nextInt();
-                    switch (opcionAyuda) {
+
+                    if(sc.hasNextInt())
+                    {
+                        int opcionAyuda = sc.nextInt();
+                        switch (opcionAyuda)
+                    {
                         case 1:
                             System.out.println(reglas());
-
-                            repetir=false;
+                            esperar(4);
                             break;
                         case 2:
                             System.out.println(acciones());
-                            repetir = false;
+                            esperar(4);
                             break;
                         case 3:
                             System.out.println(puntuaciones());
-                            repetir = false;
+                            esperar(4);
                             break;
                         default:
                             break;
                     }
                     break;
-                case 4:
+               
+                    }else{
+                        System.out.println("Error debes introducir un numero");
+                        sc.next();
+                        break;
+                    }
+                     case 4:
                     System.out.println("Hasta luego");
                     repetir = false;
                     break;
