@@ -220,12 +220,16 @@ public class despertarDelHeroe
     static final int abandono = 3;
     static final int puntosPorEnemigo = 100;
     static final int totalEnemigos = 3;
-    public static int calcularPuntuacion(int enemigosDerrotados, int vidaactual )
+    public static int calcularPuntuacion(int enemigosDerrotados, int vidaactual)
     {
-        int puntos = enemigosDerrotados * puntosPorEnemigo;
+        System.out.println("vida recibida del metodo: " + vidaactual);
+        System.out.println("Enemigos derrotados: " + enemigosDerrotados);
+        System.out.println("total enemigos en el metodo " + totalEnemigos);
+        int puntos = enemigosDerrotados  * 100;
         if(enemigosDerrotados == totalEnemigos){
-            puntos = puntos +  vidaactual;
+            puntos += vidaactual;
         }
+        System.out.println("puntos dentro del metodo : " + puntos);
         return puntos;
     }
     public static boolean enemigoDerrotad(int vidaEnemigo)
@@ -311,7 +315,8 @@ public class despertarDelHeroe
 
         }
    }
-   public static void contarEnemigosDerrotados(Enemigo enemigo, Enemigo villano, Enemigo Oscuro, int enemigosDerrotados){
+   public static int contarEnemigosDerrotados(Enemigo enemigo, Enemigo villano, Enemigo Oscuro){
+   int enemigosDerrotados = 0;
     if(!enemigo.vivo()){
         enemigosDerrotados++;
     }
@@ -321,6 +326,7 @@ public class despertarDelHeroe
     if(!Oscuro.vivo()){
         enemigosDerrotados++;
     }
+    return enemigosDerrotados;
    }
 
    public static void historia4()
@@ -368,9 +374,12 @@ public class despertarDelHeroe
                     heroe.setNombre(heroenombre);
                     int resultado = accionesBatalla(heroe,enemigo,inventario);
                     cambioBatalla(heroe, enemigo, villano, Oscuro, inventario);
-                    int enemigosDerrotados = 0;
-                    contarEnemigosDerrotados(enemigo, villano, Oscuro, enemigosDerrotados);
-                    int puntuacion = calcularPuntuacion(enemigosDerrotados, enemigosDerrotados);
+                    int enemigosDerrotados = contarEnemigosDerrotados(enemigo, villano, Oscuro);
+                    System.out.println("enemigos derrotados :" + enemigosDerrotados);
+                    System.out.println("vida :" + heroe.getVida());
+                    System.out.println("enemigos: " + totalEnemigos);
+                    int puntuacion = calcularPuntuacion(enemigosDerrotados, heroe.getVida());
+                    System.out.println("la puntuacion es: " + puntuacion);
                     GuardarRanking.guardarJugador(heroe.getNombre(), puntuacion);
                     repetir = false;
                     break;

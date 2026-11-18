@@ -1,18 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?xml-stylesheet type="text/xsl" href="ranking.xsl"?>
 <!DOCTYPE ranking SYSTEM "ranking.dtd">
 <ranking>
-        
     <jugador>
-                
-        <usuario>hola</usuario>
-                
-        <puntos>0</puntos>
-            
+        <usuario>1</usuario>
+        <puntos>326</puntos>
     </jugador>
-    
     <jugador>
         <usuario>rayo</usuario>
+        <puntos>303</puntos>
+    </jugador>
+    <jugador>
+        <usuario>player</usuario>
+        <puntos>303</puntos>
+    </jugador>
+    <jugador>
+        <usuario>pcc</usuario>
+        <puntos>303</puntos>
+    </jugador>
+    <jugador>
+        <usuario>test</usuario>
+        <puntos>303</puntos>
+    </jugador>
+    <jugador>
+        <usuario>player</usuario>
+        <puntos>303</puntos>
+    </jugador>
+    <jugador>
+        <usuario>player</usuario>
+        <puntos>303</puntos>
+    </jugador>
+    <jugador>
+        <usuario>player</usuario>
+        <puntos>303</puntos>
+    </jugador>
+    <jugador>
+        <usuario>player0</usuario>
+        <puntos>303</puntos>
+    </jugador>
+    <jugador>
+        <usuario>player0001</usuario>
         <puntos>303</puntos>
     </jugador>
 </ranking>

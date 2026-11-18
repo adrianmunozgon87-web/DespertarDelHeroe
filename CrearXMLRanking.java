@@ -24,6 +24,7 @@ TransformerFactory transformeFabrica = TransformerFactory.newInstance();
 Transformer transformer = transformeFabrica.newTransformer();
 transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "ranking.dtd");
 DOMSource origen = new DOMSource(documento);
 StreamResult destino = new StreamResult(archivo);
 transformer.transform(origen, destino);
