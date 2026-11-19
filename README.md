@@ -35,23 +35,17 @@ Para ejecutar el proyecto es necesario tener instalado:
 
 ## Cómo ejecutar el juego
 
-1. Abrir la carpeta del proyecto en el entorno de desarrollo.
-2. Comprobar que Java está instalado correctamente.
-3. Abrir una terminal en la carpeta donde están los archivos `.java`.
-4. Compilar el programa con el siguiente comando:
+Tener instalado Java JDK y Visual Studio Code con las extensiones necesarias para trabajar con Java.
 
-   ```bash
-   javac *.java
-   ```
+Abrir Visual Studio Code.
 
-5. Ejecutar el juego:
+Abrir la carpeta del proyecto El Despertar del Héroe.
 
-   ```bash
-   java despertarDelHeroe
-   ```
+Abrir el archivo despertarDelHeroe.java, que contiene el método principal del programa.
 
-Si se utiliza un entorno de desarrollo, también se puede ejecutar la clase principal desde el propio editor.
+Pulsar el botón Run (Ejecutar) que aparece en Visual Studio Code.
 
+El juego se iniciará y aparecerá el menú principal en la consola.
 ## Cómo jugar
 
 Al iniciar el programa aparece un menú con cuatro opciones:
